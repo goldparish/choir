@@ -216,6 +216,72 @@
                 display: none;
             }
         }
+        
+        /* Mobile Responsive Styles */
+        @media screen and (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            .header {
+                padding-bottom: 15px;
+                margin-bottom: 20px;
+            }
+            
+            .logo-section {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .logo {
+                margin-right: 0;
+                margin-bottom: 15px;
+            }
+            
+            .church-name {
+                font-size: 24px;
+            }
+            
+            .subtitle {
+                font-size: 20px;
+            }
+            
+            .form-group {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .form-group label {
+                min-width: auto;
+                margin-right: 0;
+                margin-bottom: 5px;
+            }
+            
+            .signature-section {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            
+            .checkbox-group, .radio-group {
+                margin-left: 0;
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .section-header {
+                font-size: 16px;
+                padding: 10px;
+            }
+            
+            .submit-button {
+                width: 100%;
+                margin-bottom: 10px;
+            }
+            
+            .digital-signature-option {
+                margin-bottom: 20px;
+            }
+        }
         .full-width-group {
             display: block;
         }
@@ -289,6 +355,7 @@
                 emergencyRelationship: formData.get('emergencyRelationship') || '',
                 signature: formData.get('digitalSignature') || 'Physical signature provided',
                 applicationDate: formData.get('applicationDate') || '',
+                guarantorName: formData.get('guarantorName') || '',
                 guarantorSignature: formData.get('guarantorSignature') || 'Physical signature provided',
                 guarantorDate: formData.get('guarantorDate') || ''
             };
@@ -410,6 +477,13 @@
                 • Name: ${data.emergencyName}
                 • Phone: ${data.emergencyPhone}
                 • Relationship: ${data.emergencyRelationship}
+                
+                Declaration:
+                • Applicant Signature: ${data.signature}
+                • Date: ${data.applicationDate}
+                • Guarantor Name: ${data.guarantorName}
+                • Guarantor Signature: ${data.guarantorSignature}
+                • Guarantor Date: ${data.guarantorDate}
                 `
             };
 
@@ -549,6 +623,7 @@
             emailBody += "=== DECLARATION ===\n";
             emailBody += `Signature: ${data.signature}\n`;
             emailBody += `Date: ${data.applicationDate}\n`;
+            emailBody += `Guarantor Name: ${data.guarantorName}\n`;
             emailBody += `Guarantor Signature: ${data.guarantorSignature}\n`;
             emailBody += `Guarantor Date: ${data.guarantorDate}\n`;
             
@@ -826,6 +901,11 @@
                 </div>
 
                 <div>
+                    <div class="form-group" style="margin-bottom: 15px;">
+                        <label for="guarantorName">Guarantor's Full Name:</label>
+                        <input type="text" id="guarantorName" name="guarantorName" placeholder="Full name of guarantor (parent, spouse, etc.)" required>
+                    </div>
+                    
                     <div class="digital-signature-option">
                         <div class="digital-signature-checkbox">
                             <input type="checkbox" id="guarantorSignatureCheckbox" onchange="toggleGuarantorSignature()">
@@ -837,7 +917,7 @@
                                id="guarantorSignatureInput" 
                                name="guarantorSignature" 
                                class="digital-signature-input" 
-                               placeholder="Type guarantor's full name">
+                               placeholder="Type guarantor's full name as signature">
                     </div>
                     <div class="signature-box"></div>
                     <strong>Guarantor's Signature</strong>
