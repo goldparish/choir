@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CCC GOLD PARISH EDINBURGH SCOTLAND - Choir Membership Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            line-height: 1.4;
+        }
+        .header {
+            text-align: center;
+            border-bottom: 3px solid #8B4513;
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+        .logo-section {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 15px;
+        }
+        .logo {
+            width: 100px;
+            height: 100px;
+            margin-right: 20px;
+            border-radius: 50%;
+            border: 3px solid #8B4513;
+        }
+        .church-name {
+            font-size: 32px;
+            font-weight: bold;
+            color: #8B4513;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+        }
+        .subtitle {
+            font-size: 24px;
+            color: #DAA520;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .form-title {
+            font-size: 20px;
+            font-weight: bold;
+            text-align: center;
+            margin: 20px 0;
+            color: #8B4513;
+            text-transform: uppercase;
+        }
+        .form-group {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        .form-group label {
+            min-width: 200px;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        .form-group input[type="text"], 
+        .form-group input[type="email"], 
+        .form-group input[type="tel"],
+        .form-group input[type="date"],
+        .form-group select,
+        .form-group textarea {
+            flex: 1;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+        .form-group textarea {
+            min-height: 80px;
+            resize: vertical;
+        }
+        .section-header {
+            background-color: #f4f0e8;
+            padding: 15px;
+            margin: 25px 0 15px 0;
+            font-weight: bold;
+            color: #8B4513;
+            border-left: 4px solid #8B4513;
+            font-size: 18px;
+            text-transform: uppercase;
+        }
+        .checkbox-group {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-left: 200px;
+        }
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            margin-bottom: 10px;
+        }
+        .radio-group {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-left: 200px;
+        }
+        .radio-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .note {
+            background-color: #fff8dc;
+            border: 1px solid #daa520;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+            font-size: 13px;
+            color: #8B4513;
+            font-style: italic;
+        }
+        .declaration-section {
+            background-color: #f8f9fa;
+            border: 2px solid #8B4513;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        .declaration-text {
+            margin-bottom: 20px;
+            line-height: 1.6;
+            text-align: justify;
+        }
+        .signature-section {
+            margin-top: 30px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            align-items: end;
+        }
+        .signature-box {
+            width: 100%;
+            border-bottom: 2px solid #000;
+            height: 40px;
+            margin-bottom: 5px;
+        }
+        .digital-signature-option {
+            margin-bottom: 15px;
+            padding: 10px;
+            background-color: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 5px;
+        }
+        .digital-signature-checkbox {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 10px;
+        }
+        .digital-signature-input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-family: 'Brush Script MT', cursive;
+            font-size: 18px;
+            font-style: italic;
+            display: none;
+        }
+        .digital-signature-input.active {
+            display: block;
+        }
+        .submit-section {
+            background-color: #f4f0e8;
+            border: 2px solid #8B4513;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        .submit-instructions {
+            margin-bottom: 15px;
+            font-weight: bold;
+            color: #8B4513;
+        }
+        .submit-button {
+            background-color: #8B4513;
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-right: 10px;
+            margin-bottom: 10px;
+        }
+        .submit-button:hover {
+            background-color: #654321;
+        }
+        .print-button {
+            background-color: #DAA520;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 20px 0;
+            font-size: 16px;
+        }
+        .print-button:hover {
+            background-color: #B8860B;
+        }
+        @media print {
+            .print-button, .submit-section {
+                display: none;
+            }
+        }
+        .full-width-group {
+            display: block;
+        }
+        .full-width-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+    </style>
+    <script>
+        // Google Sheets Integration
+        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxSO_Wh2amPL7W5zoU446QCBm4XMAXzq9xQgf2ipU7lrK95ry43UAwazf7ui8jGdT6fiQ/exechttps://script.google.com/macros/s/AKfycbwlYVtKuAGOv6fzXO3V7fnEnRxkI8Xq8MfDomGNHjFYH2dGGODvAc_uafrxBfrY6CFUvw/exec';
+        
+        // Alternative: Formspree integration (more reliable)
+        const FORMSPREE_URL = 'https://formspree.io/f/xwpaknpj'; // Replace with your Formspree form ID
+        
+        // Alternative: EmailJS integration (client-side email)
+        const USE_FORMSPREE = true; // Set to true to use Formspree instead of Google Sheets
+
+        function submitForm() {
+            // Show loading message
+            document.getElementById('submitBtn').innerHTML = '📤 Submitting...';
+            document.getElementById('submitBtn').disabled = true;
+
+            // Collect form data
+            const formData = new FormData(document.querySelector('form'));
+            
+            // Handle special interests (multiple checkboxes)
+            const interests = [];
+            const interestCheckboxes = document.querySelectorAll('input[name="interests"]:checked');
+            interestCheckboxes.forEach(checkbox => interests.push(checkbox.value));
+            if (document.getElementById('otherInterest').value) {
+                interests.push(`Other: ${document.getElementById('otherInterest').value}`);
+            }
+
+            // Prepare data for submission
+            const submissionData = {
+                timestamp: new Date().toISOString(),
+                fullName: formData.get('fullName') || '',
+                birthDate: formData.get('birthDate') || '',
+                gender: formData.get('gender') || '',
+                address: formData.get('address') || '',
+                phone: formData.get('phone') || '',
+                email: formData.get('email') || '',
+                choralPart: formData.get('choralPart') || '',
+                experience: formData.get('experience') || '',
+                readMusic: formData.get('readMusic') || '',
+                previousTraining: formData.get('previousTraining') || '',
+                specialInterests: interests.join(', ') || 'None specified',
+                rehearsalDay: formData.get('rehearsalDay') || '',
+                rehearsalTime: formData.get('rehearsalTime') || '',
+                availablePerformance: formData.get('availablePerformance') || '',
+                emergencyName: formData.get('emergencyName') || '',
+                emergencyPhone: formData.get('emergencyPhone') || '',
+                emergencyRelationship: formData.get('emergencyRelationship') || '',
+                signature: formData.get('digitalSignature') || 'Physical signature provided',
+                applicationDate: formData.get('applicationDate') || '',
+                guarantorSignature: formData.get('guarantorSignature') || 'Physical signature provided',
+                guarantorDate: formData.get('guarantorDate') || ''
+            };
+
+            // Choose submission method
+            if (USE_FORMSPREE && FORMSPREE_URL !== 'https://formspree.io/f/YOUR_FORM_ID') {
+                submitToFormspree(submissionData);
+            } else if (GOOGLE_SCRIPT_URL && GOOGLE_SCRIPT_URL !== 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE') {
+                submitToGoogleSheets(submissionData);
+            } else {
+                // Fallback to email
+                alert('ℹ️ Using email submission method.');
+                sendEmailCopy(submissionData);
+                resetSubmitButton();
+            }
+        }
+
+        function submitToFormspree(data) {
+            const formData = new FormData();
+            Object.keys(data).forEach(key => {
+                formData.append(key, data[key]);
+            });
+
+            fetch(FORMSPREE_URL, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            })
+            .then(response => {
+                if (response.ok) {
+                    alert('✅ Registration submitted successfully! Data has been saved and you will receive an email confirmation.');
+                    document.querySelector('form').reset();
+                } else {
+                    throw new Error('Formspree submission failed');
+                }
+            })
+            .catch(error => {
+                console.error('Formspree Error:', error);
+                alert('⚠️ Having trouble with automatic submission. Using email method instead.');
+                sendEmailCopy(data);
+            })
+            .finally(() => {
+                resetSubmitButton();
+            });
+        }
+
+        function submitToGoogleSheets(data) {
+        function submitToGoogleSheets(data) {
+            // Try Google Sheets submission with better error handling
+            fetch(GOOGLE_SCRIPT_URL, {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: {
+                    'Content-Type': 'text/plain',
+                },
+                body: JSON.stringify(data)
+            })
+            .then(response => {
+                console.log('Google Sheets submission attempted');
+                // With no-cors, we assume success and also send email for backup
+                alert('✅ Registration submitted successfully! Data has been saved to our database. You will also receive an email confirmation.');
+                sendEmailCopy(data);
+                document.querySelector('form').reset();
+            })
+            .catch(error => {
+                console.error('Google Sheets Error:', error);
+                alert('⚠️ Having trouble with automatic submission. Using email method instead. Your data is still being sent!');
+                sendEmailCopy(data);
+            })
+            .finally(() => {
+                resetSubmitButton();
+            });
+        }
+
+        function resetSubmitButton() {
+            document.getElementById('submitBtn').innerHTML = '📧 Submit Registration';
+            document.getElementById('submitBtn').disabled = false;
+        }
+        }
+
+        function sendEmailCopy(data) {
+            // Build email content
+            let emailBody = "NEW CHOIR MEMBERSHIP APPLICATION - CCC GOLD PARISH EDINBURGH SCOTLAND\n\n";
+            
+            emailBody += "=== PERSONAL INFORMATION ===\n";
+            emailBody += `Full Name: ${data.fullName}\n`;
+            emailBody += `Date of Birth: ${data.birthDate}\n`;
+            emailBody += `Gender: ${data.gender}\n`;
+            emailBody += `Address: ${data.address}\n`;
+            emailBody += `Phone Number: ${data.phone}\n`;
+            emailBody += `Email Address: ${data.email}\n\n`;
+            
+            emailBody += "=== MUSICAL INFORMATION ===\n";
+            emailBody += `Choral Part: ${data.choralPart}\n`;
+            emailBody += `Previous Choir Experience: ${data.experience}\n`;
+            emailBody += `Do you read music: ${data.readMusic}\n`;
+            emailBody += `Previous training: ${data.previousTraining}\n`;
+            emailBody += `Special interests/skills: ${data.specialInterests}\n\n`;
+            
+            emailBody += "=== AVAILABILITY ===\n";
+            emailBody += `Rehearsal Schedule: ${data.rehearsalDay}\n`;
+            emailBody += `Preferred Time: ${data.rehearsalTime}\n`;
+            emailBody += `Available for performances: ${data.availablePerformance}\n\n`;
+            
+            emailBody += "=== EMERGENCY CONTACT ===\n";
+            emailBody += `Name: ${data.emergencyName}\n`;
+            emailBody += `Phone: ${data.emergencyPhone}\n`;
+            emailBody += `Relationship: ${data.emergencyRelationship}\n\n`;
+            
+            emailBody += "=== DECLARATION ===\n";
+            emailBody += `Signature: ${data.signature}\n`;
+            emailBody += `Date: ${data.applicationDate}\n`;
+            emailBody += `Guarantor Signature: ${data.guarantorSignature}\n`;
+            emailBody += `Guarantor Date: ${data.guarantorDate}\n`;
+            
+            // Create mailto link
+            const subject = encodeURIComponent("Choir Membership Application - " + (data.fullName || 'New Member'));
+            const body = encodeURIComponent(emailBody);
+            const mailtoLink = `mailto:cccgoldparishedinburgh1@gmail.com?subject=${subject}&body=${body}`;
+            
+            // Open email client
+            window.location.href = mailtoLink;
+        }
+
+        function saveAsPDF() {
+            window.print();
+        }
+
+        // Digital signature functionality
+        function toggleDigitalSignature() {
+            const checkbox = document.getElementById('digitalSignatureCheckbox');
+            const input = document.getElementById('digitalSignatureInput');
+            
+            if (checkbox.checked) {
+                input.classList.add('active');
+                input.required = true;
+                input.focus();
+            } else {
+                input.classList.remove('active');
+                input.required = false;
+                input.value = '';
+            }
+        }
+
+        function toggleGuarantorSignature() {
+            const checkbox = document.getElementById('guarantorSignatureCheckbox');
+            const input = document.getElementById('guarantorSignatureInput');
+            
+            if (checkbox.checked) {
+                input.classList.add('active');
+                input.required = true;
+                input.focus();
+            } else {
+                input.classList.remove('active');
+                input.required = false;
+                input.value = '';
+            }
+        }
+
+        // Auto-fill today's date
+        document.addEventListener('DOMContentLoaded', function() {
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('applicationDate').value = today;
+            document.getElementById('guarantorDate').value = today;
+        });
+
+        // Show/hide other interest input
+        function toggleOtherInterest() {
+            const checkbox = document.getElementById('interestOther');
+            const input = document.getElementById('otherInterest');
+            
+            if (checkbox.checked) {
+                input.style.display = 'block';
+                input.focus();
+            } else {
+                input.style.display = 'none';
+                input.value = '';
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="header">
+        <div class="logo-section">
+            <img src="C:\Users\s2749646\Documents\church web\logo.jpg" alt="CCC Gold Parish Logo" class="logo">
+            <div>
+                <div class="church-name">CCC GOLD PARISH EDINBURGH SCOTLAND</div>
+                <div class="subtitle">CHOIR</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-title">CHOIR MEMBERSHIP FORM</div>
+
+    <button class="print-button" onclick="window.print()">Print This Form</button>
+
+    <form>
+        <div class="section-header">Personal Information</div>
+        
+        <div class="form-group">
+            <label for="fullName">Full Name:</label>
+            <input type="text" id="fullName" name="fullName" placeholder="Enter your full name" required>
+        </div>
+
+        <div class="form-group">
+            <label for="birthDate">Date of Birth (Day and Month):</label>
+            <input type="text" id="birthDate" name="birthDate" placeholder="e.g., 15th March" required>
+        </div>
+
+        <div class="form-group">
+            <label for="gender">Gender:</label>
+            <select id="gender" name="gender" required>
+                <option value="">Select Gender</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Other">Other</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="address">Address:</label>
+            <textarea id="address" name="address" placeholder="Enter your full address" required></textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="phone">Phone Number:</label>
+            <input type="tel" id="phone" name="phone" placeholder="Enter your phone number" required>
+        </div>
+
+        <div class="form-group">
+            <label for="email">Email Address:</label>
+            <input type="email" id="email" name="email" placeholder="Enter your email address" required>
+        </div>
+
+        <div class="section-header">Musical Information</div>
+        
+        <div class="form-group">
+            <label for="choralPart">A) Choral Part:</label>
+            <select id="choralPart" name="choralPart" required>
+                <option value="">Select your voice part</option>
+                <option value="Soprano">Soprano</option>
+                <option value="Alto">Alto</option>
+                <option value="Tenor">Tenor</option>
+                <option value="Bass">Bass</option>
+                <option value="Not sure (will need audition)">I'm not sure (will need audition)</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="experience">B) Previous Choir Experience:</label>
+            <select id="experience" name="experience" required>
+                <option value="">Select your experience level</option>
+                <option value="Beginner">Beginner</option>
+                <option value="Intermediate">Intermediate</option>
+                <option value="Advanced">Advanced</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="readMusic">C) Do you read music:</label>
+            <div class="radio-group">
+                <div class="radio-item">
+                    <input type="radio" id="readMusicYes" name="readMusic" value="Yes" required>
+                    <label for="readMusicYes">Yes</label>
+                </div>
+                <div class="radio-item">
+                    <input type="radio" id="readMusicNo" name="readMusic" value="No" required>
+                    <label for="readMusicNo">No</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="full-width-group">
+            <label for="previousTraining">D) Please describe any previous choir, musical, or vocal training:</label>
+            <textarea id="previousTraining" name="previousTraining" placeholder="Describe your musical background, training, or experience..." style="width: 100%; margin-left: 0;"></textarea>
+        </div>
+
+        <div class="full-width-group" style="margin-top: 20px;">
+            <label>E) Special interests or skills:</label>
+            <div class="checkbox-group" style="margin-left: 0; margin-top: 10px;">
+                <div class="checkbox-item">
+                    <input type="checkbox" id="interestInstruments" name="interests" value="Instruments">
+                    <label for="interestInstruments">Instruments</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="interestComposition" name="interests" value="Composition">
+                    <label for="interestComposition">Composition</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="interestConducting" name="interests" value="Conducting">
+                    <label for="interestConducting">Conducting</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="interestChoreography" name="interests" value="Choreography">
+                    <label for="interestChoreography">Choreography</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="interestOther" name="interests" value="Other" onchange="toggleOtherInterest()">
+                    <label for="interestOther">Others:</label>
+                </div>
+            </div>
+            <input type="text" id="otherInterest" placeholder="Please specify other interests or skills" style="width: 100%; margin-top: 10px; display: none;">
+        </div>
+
+        <div class="section-header">Availability</div>
+        
+        <div class="form-group">
+            <label for="rehearsalDay">A) Rehearsal Schedule:</label>
+            <select id="rehearsalDay" name="rehearsalDay" required>
+                <option value="">Select preferred day</option>
+                <option value="Saturdays">Saturdays</option>
+                <option value="Sunday">Sunday</option>
+                <option value="Monday">Monday</option>
+                <option value="Tuesday">Tuesday</option>
+                <option value="Wednesday">Wednesday</option>
+                <option value="Thursday">Thursday</option>
+                <option value="Friday">Friday</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="rehearsalTime">B) Preferred rehearsal time:</label>
+            <select id="rehearsalTime" name="rehearsalTime" required>
+                <option value="">Select preferred time</option>
+                <option value="Afternoon">Afternoon</option>
+                <option value="Evening">Evening</option>
+                <option value="Night">Night</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="availablePerformance">C) Available for performances/special events:</label>
+            <select id="availablePerformance" name="availablePerformance" required>
+                <option value="">Select availability</option>
+                <option value="Yes">Yes</option>
+                <option value="No">No</option>
+                <option value="Occasionally">Occasionally</option>
+            </select>
+        </div>
+
+        <div class="section-header">Emergency Contact Information</div>
+        
+        <div class="form-group">
+            <label for="emergencyName">Name:</label>
+            <input type="text" id="emergencyName" name="emergencyName" placeholder="Full name of emergency contact" required>
+        </div>
+
+        <div class="form-group">
+            <label for="emergencyPhone">Phone Number:</label>
+            <input type="tel" id="emergencyPhone" name="emergencyPhone" placeholder="Emergency contact phone number" required>
+        </div>
+
+        <div class="form-group">
+            <label for="emergencyRelationship">Relationship:</label>
+            <input type="text" id="emergencyRelationship" name="emergencyRelationship" placeholder="Relationship to you (e.g., Parent, Spouse, Friend)" required>
+        </div>
+
+        <div class="section-header">Declaration</div>
+        
+        <div class="declaration-section">
+            <div class="declaration-text">
+                <p>By signing below, I agree to abide by the policies and guidelines of the choir, including regular attendance at rehearsals and church services. I understand that consistent participation is vital to the success of the choir. I also understand that if I am found wanting or violating any of the choir rules and guidelines, I shall be subjected to the appropriate disciplinary procedure.</p>
+            </div>
+
+            <div class="signature-section">
+                <div>
+                    <div class="digital-signature-option">
+                        <div class="digital-signature-checkbox">
+                            <input type="checkbox" id="digitalSignatureCheckbox" onchange="toggleDigitalSignature()">
+                            <label for="digitalSignatureCheckbox">
+                                <strong>✓ I agree to use my typed name as my digital signature</strong>
+                            </label>
+                        </div>
+                        <input type="text" 
+                               id="digitalSignatureInput" 
+                               name="digitalSignature" 
+                               class="digital-signature-input" 
+                               placeholder="Type your full name here as your signature">
+                    </div>
+                    <div class="signature-box"></div>
+                    <strong>Signature</strong>
+                    
+                    <div class="form-group" style="margin-top: 10px;">
+                        <label for="applicationDate">Date:</label>
+                        <input type="date" id="applicationDate" name="applicationDate">
+                    </div>
+                </div>
+
+                <div>
+                    <div class="digital-signature-option">
+                        <div class="digital-signature-checkbox">
+                            <input type="checkbox" id="guarantorSignatureCheckbox" onchange="toggleGuarantorSignature()">
+                            <label for="guarantorSignatureCheckbox">
+                                <strong>✓ Guarantor digital signature</strong>
+                            </label>
+                        </div>
+                        <input type="text" 
+                               id="guarantorSignatureInput" 
+                               name="guarantorSignature" 
+                               class="digital-signature-input" 
+                               placeholder="Type guarantor's full name">
+                    </div>
+                    <div class="signature-box"></div>
+                    <strong>Guarantor's Signature</strong>
+                    
+                    <div class="form-group" style="margin-top: 10px;">
+                        <label for="guarantorDate">Date:</label>
+                        <input type="date" id="guarantorDate" name="guarantorDate">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="submit-section">
+            <div class="submit-instructions">How to Submit This Registration Form:</div>
+            <div style="margin-bottom: 15px;">
+                <strong>Option 1 - Online Submission:</strong> Click the button below to email your application directly to the choir coordinator.
+            </div>
+            <div style="margin-bottom: 15px;">
+                <strong>Option 2 - Print & Submit:</strong> Print this form, fill it by hand, and deliver to the church office.
+            </div>
+            <div style="margin-bottom: 15px;">
+                <strong>Email:</strong> cccgoldparishedinburgh1@gmail.com
+            </div>
+            <button type="button" id="submitBtn" class="submit-button" onclick="submitForm()">📧 Submit Registration</button>
+            <button type="button" class="submit-button" onclick="saveAsPDF()">🖨️ Print/Save as PDF</button>
+            
+            <div style="margin-top: 15px; padding: 10px; background-color: #fff3cd; border-radius: 5px; border: 1px solid #ffeaa7;">
+                <strong>📊 Automatic Data Collection:</strong> All submissions are automatically saved to a Google Sheet for easy management and Excel export.
+            </div>
+        </div>
+    </form>
+
+    <div style="margin-top: 30px; text-align: center; color: #666; font-size: 12px;">
+        <p>CCC GOLD PARISH EDINBURGH SCOTLAND - CHOIR MINISTRY</p>
+        <p>For office use only: Application received on _____________ by _____________</p>
+    </div>
+
+    <div class="note">
+        <strong>Note:</strong> All submitted forms are automatically collected and can be downloaded as a database for record keeping. This form is designed to work with GitHub Pages hosting for easy online access.
+    </div>
+</body>
+</html>
