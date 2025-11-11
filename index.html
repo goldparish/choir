@@ -349,18 +349,20 @@
         }
 
         function sendEmailJSConfirmation(data) {
-            // Send confirmation email to user
+            // Send confirmation email to user - using the template you created
             const userEmailParams = {
                 to_name: data.fullName,
                 to_email: data.email,
-                from_name: 'CCC Gold Parish Edinburgh Scotland',
-                church_name: 'CCC GOLD PARISH EDINBURGH SCOTLAND',
-                choir_name: 'Choir Ministry',
-                registration_date: new Date().toLocaleDateString(),
                 chosen_part: data.choralPart,
                 experience_level: data.experience,
-                message: 'Thank you for your interest in joining our church choir! We have received your registration and will review your application. Someone from our choir ministry will contact you soon with next steps.'
+                registration_date: new Date().toLocaleDateString('en-GB', { 
+                    day: 'numeric', 
+                    month: 'long', 
+                    year: 'numeric' 
+                })
             };
+
+            console.log('Sending user email with params:', userEmailParams);
 
             emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID_USER, userEmailParams)
                 .then(function(response) {
@@ -369,32 +371,51 @@
                     console.log('Failed to send user confirmation email:', error);
                 });
 
-            // Send notification email to church admin
+            // Send notification email to church admin (if you want to create a separate admin template)
             const adminEmailParams = {
-                from_name: data.fullName,
-                reply_to: data.email,
-                full_name: data.fullName,
-                birth_date: data.birthDate,
-                gender: data.gender,
-                address: data.address,
-                phone: data.phone,
-                email: data.email,
-                choral_part: data.choralPart,
-                experience: data.experience,
-                reads_music: data.readMusic,
-                previous_training: data.previousTraining,
-                special_interests: data.specialInterests,
-                rehearsal_day: data.rehearsalDay,
-                rehearsal_time: data.rehearsalTime,
-                available_performance: data.availablePerformance,
-                emergency_name: data.emergencyName,
-                emergency_phone: data.emergencyPhone,
-                emergency_relationship: data.emergencyRelationship,
-                signature: data.signature,
-                application_date: data.applicationDate,
-                registration_timestamp: data.timestamp
+                to_name: 'Church Admin',
+                to_email: 'cccgoldparishedinburgh1@gmail.com',
+                applicant_name: data.fullName,
+                applicant_email: data.email,
+                applicant_phone: data.phone,
+                chosen_part: data.choralPart,
+                experience_level: data.experience,
+                registration_date: new Date().toLocaleDateString('en-GB', { 
+                    day: 'numeric', 
+                    month: 'long', 
+                    year: 'numeric' 
+                }),
+                full_details: `
+                Personal Information:
+                • Full Name: ${data.fullName}
+                • Date of Birth: ${data.birthDate}
+                • Gender: ${data.gender}
+                • Address: ${data.address}
+                • Phone: ${data.phone}
+                • Email: ${data.email}
+                
+                Musical Information:
+                • Choral Part: ${data.choralPart}
+                • Experience: ${data.experience}
+                • Reads Music: ${data.readMusic}
+                • Previous Training: ${data.previousTraining}
+                • Special Interests: ${data.specialInterests}
+                
+                Availability:
+                • Rehearsal Day: ${data.rehearsalDay}
+                • Rehearsal Time: ${data.rehearsalTime}
+                • Available for Performances: ${data.availablePerformance}
+                
+                Emergency Contact:
+                • Name: ${data.emergencyName}
+                • Phone: ${data.emergencyPhone}
+                • Relationship: ${data.emergencyRelationship}
+                `
             };
 
+            console.log('Sending admin email with params:', adminEmailParams);
+
+            // Use the same template for admin for now, or create a new one
             emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID_ADMIN, adminEmailParams)
                 .then(function(response) {
                     console.log('Admin notification email sent successfully!', response.status, response.text);
