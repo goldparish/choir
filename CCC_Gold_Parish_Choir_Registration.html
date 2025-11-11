@@ -227,7 +227,7 @@
     </style>
     <script>
         // Google Sheets Integration
-        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwlYVtKuAGOv6fzXO3V7fnEnRxkI8Xq8MfDomGNHjFYH2dGGODvAc_uafrxBfrY6CFUvw/exec';
+        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxSO_Wh2amPL7W5zoU446QCBm4XMAXzq9xQgf2ipU7lrK95ry43UAwazf7ui8jGdT6fiQ/exechttps://script.google.com/macros/s/AKfycbwlYVtKuAGOv6fzXO3V7fnEnRxkI8Xq8MfDomGNHjFYH2dGGODvAc_uafrxBfrY6CFUvw/exec';
         
         // Alternative: Formspree integration (more reliable)
         const FORMSPREE_URL = 'https://formspree.io/f/xwpaknpj'; // Replace with your Formspree form ID
@@ -278,9 +278,9 @@
             };
 
             // Choose submission method
-            if (USE_FORMSPREE && FORMSPREE_URL !== 'https://formspree.io/f/xwpaknpj') {
+            if (USE_FORMSPREE && FORMSPREE_URL !== 'https://formspree.io/f/YOUR_FORM_ID') {
                 submitToFormspree(submissionData);
-            } else if (GOOGLE_SCRIPT_URL && GOOGLE_SCRIPT_URL !== 'https://script.google.com/macros/s/AKfycbwlYVtKuAGOv6fzXO3V7fnEnRxkI8Xq8MfDomGNHjFYH2dGGODvAc_uafrxBfrY6CFUvw/exec') {
+            } else if (GOOGLE_SCRIPT_URL && GOOGLE_SCRIPT_URL !== 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE') {
                 submitToGoogleSheets(submissionData);
             } else {
                 // Fallback to email
@@ -322,7 +322,6 @@
         }
 
         function submitToGoogleSheets(data) {
-        function submitToGoogleSheets(data) {
             // Try Google Sheets submission with better error handling
             fetch(GOOGLE_SCRIPT_URL, {
                 method: 'POST',
@@ -352,7 +351,6 @@
         function resetSubmitButton() {
             document.getElementById('submitBtn').innerHTML = '📧 Submit Registration';
             document.getElementById('submitBtn').disabled = false;
-        }
         }
 
         function sendEmailCopy(data) {
@@ -459,7 +457,7 @@
 <body>
     <div class="header">
         <div class="logo-section">
-            <img src="logo.jpg" alt="CCC Gold Parish Logo" class="logo">
+            <img src="./logo.jpg" alt="CCC Gold Parish Logo" class="logo">
             <div>
                 <div class="church-name">CCC GOLD PARISH EDINBURGH SCOTLAND</div>
                 <div class="subtitle">CHOIR</div>
@@ -718,4 +716,3 @@
     </div>
 </body>
 </html>
-
