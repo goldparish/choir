@@ -225,15 +225,31 @@
             font-weight: bold;
         }
     </style>
+    <!-- EmailJS Integration -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script type="text/javascript">
+        (function(){
+            emailjs.init({
+                publicKey: "e7LaHwqb7-45VnIzZ", // Your actual EmailJS public key
+            });
+        })();
+    </script>
     <script>
         // Google Sheets Integration
-        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxSO_Wh2amPL7W5zoU446QCBm4XMAXzq9xQgf2ipU7lrK95ry43UAwazf7ui8jGdT6fiQ/exechttps://script.google.com/macros/s/AKfycbwlYVtKuAGOv6fzXO3V7fnEnRxkI8Xq8MfDomGNHjFYH2dGGODvAc_uafrxBfrY6CFUvw/exec';
+        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwlYVtKuAGOv6fzXO3V7fnEnRxkI8Xq8MfDomGNHjFYH2dGGODvAc_uafrxBfrY6CFUvw/exec';
         
-        // Alternative: Formspree integration (more reliable)
-        const FORMSPREE_URL = 'https://formspree.io/f/xwpaknpj'; // Replace with your Formspree form ID
+        // Formspree integration
+        const FORMSPREE_URL = 'https://formspree.io/f/xwpaknpj';
         
-        // Alternative: EmailJS integration (client-side email)
-        const USE_FORMSPREE = true; // Set to true to use Formspree instead of Google Sheets
+        // EmailJS Configuration (Free automatic emails)
+        const EMAILJS_SERVICE_ID = 'service_7i40rhp'; // Your EmailJS service ID
+        const EMAILJS_TEMPLATE_ID_ADMIN = 'template_ejbbvqc'; // Template for admin notifications
+        const EMAILJS_TEMPLATE_ID_USER = 'template_ejbbvqc'; // Same template for now (you can create separate user template)
+        const EMAILJS_PUBLIC_KEY = 'e7LaHwqb7-45VnIzZ'; // Your EmailJS public key
+        
+        // Configuration options
+        const USE_EMAILJS = true; // Set to true to use EmailJS for automatic confirmations
+        const USE_FORMSPREE = true; // Set to true to use Formspree for data collection
 
         function submitForm() {
             // Show loading message
@@ -296,6 +312,11 @@
                 formData.append(key, data[key]);
             });
 
+            // Add Formspree auto-response (backup method)
+            formData.append('_autoresponse', 'Thank you for your choir registration! We have received your application for the CCC Gold Parish Edinburgh Scotland Choir. Your details are being reviewed and we will contact you soon with next steps. Blessings, CCC Gold Parish Choir Ministry');
+            formData.append('_subject', 'New Choir Registration: ' + data.fullName);
+
+            // Submit to Formspree for data collection
             fetch(FORMSPREE_URL, {
                 method: 'POST',
                 body: formData,
@@ -305,8 +326,14 @@
             })
             .then(response => {
                 if (response.ok) {
-                    alert('✅ Registration submitted successfully! Data has been saved and you will receive an email confirmation.');
+                    // Send EmailJS confirmation if configured
+                    if (USE_EMAILJS && EMAILJS_SERVICE_ID !== 'YOUR_SERVICE_ID') {
+                        sendEmailJSConfirmation(data);
+                    }
+                    
+                    alert('✅ Registration submitted successfully! Data has been saved and you will receive an email confirmation at ' + data.email + ' shortly.');
                     document.querySelector('form').reset();
+                    showConfirmationMessage(data.fullName, data.email);
                 } else {
                     throw new Error('Formspree submission failed');
                 }
@@ -319,6 +346,61 @@
             .finally(() => {
                 resetSubmitButton();
             });
+        }
+
+        function sendEmailJSConfirmation(data) {
+            // Send confirmation email to user
+            const userEmailParams = {
+                to_name: data.fullName,
+                to_email: data.email,
+                from_name: 'CCC Gold Parish Edinburgh Scotland',
+                church_name: 'CCC GOLD PARISH EDINBURGH SCOTLAND',
+                choir_name: 'Choir Ministry',
+                registration_date: new Date().toLocaleDateString(),
+                chosen_part: data.choralPart,
+                experience_level: data.experience,
+                message: 'Thank you for your interest in joining our church choir! We have received your registration and will review your application. Someone from our choir ministry will contact you soon with next steps.'
+            };
+
+            emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID_USER, userEmailParams)
+                .then(function(response) {
+                    console.log('User confirmation email sent successfully!', response.status, response.text);
+                }, function(error) {
+                    console.log('Failed to send user confirmation email:', error);
+                });
+
+            // Send notification email to church admin
+            const adminEmailParams = {
+                from_name: data.fullName,
+                reply_to: data.email,
+                full_name: data.fullName,
+                birth_date: data.birthDate,
+                gender: data.gender,
+                address: data.address,
+                phone: data.phone,
+                email: data.email,
+                choral_part: data.choralPart,
+                experience: data.experience,
+                reads_music: data.readMusic,
+                previous_training: data.previousTraining,
+                special_interests: data.specialInterests,
+                rehearsal_day: data.rehearsalDay,
+                rehearsal_time: data.rehearsalTime,
+                available_performance: data.availablePerformance,
+                emergency_name: data.emergencyName,
+                emergency_phone: data.emergencyPhone,
+                emergency_relationship: data.emergencyRelationship,
+                signature: data.signature,
+                application_date: data.applicationDate,
+                registration_timestamp: data.timestamp
+            };
+
+            emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID_ADMIN, adminEmailParams)
+                .then(function(response) {
+                    console.log('Admin notification email sent successfully!', response.status, response.text);
+                }, function(error) {
+                    console.log('Failed to send admin notification email:', error);
+                });
         }
 
         function submitToGoogleSheets(data) {
@@ -351,6 +433,67 @@
         function resetSubmitButton() {
             document.getElementById('submitBtn').innerHTML = '📧 Submit Registration';
             document.getElementById('submitBtn').disabled = false;
+        }
+
+        function showConfirmationMessage(name, email) {
+            // Create a confirmation message overlay
+            const overlay = document.createElement('div');
+            overlay.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(0, 0, 0, 0.5);
+                z-index: 1000;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            `;
+
+            const message = document.createElement('div');
+            message.style.cssText = `
+                background: white;
+                padding: 30px;
+                border-radius: 10px;
+                max-width: 500px;
+                text-align: center;
+                box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+                border: 3px solid #8B4513;
+            `;
+
+            message.innerHTML = `
+                <h2 style="color: #8B4513; margin-bottom: 15px;">✅ Registration Received!</h2>
+                <p style="margin-bottom: 15px;">Thank you, <strong>${name}</strong>!</p>
+                <p style="margin-bottom: 15px;">Your choir registration has been successfully submitted.</p>
+                <div style="background-color: #f4f0e8; padding: 15px; border-radius: 5px; margin: 15px 0;">
+                    <p style="margin: 0;"><strong>📧 Email Confirmation:</strong></p>
+                    <p style="margin: 5px 0 0 0;">A confirmation email will be sent to:<br>
+                    <strong style="color: #8B4513;">${email}</strong></p>
+                </div>
+                <p style="margin-bottom: 20px; font-size: 14px; color: #666;">
+                    We will review your application and contact you with next steps.
+                </p>
+                <button onclick="this.parentElement.parentElement.remove()" style="
+                    background-color: #8B4513;
+                    color: white;
+                    padding: 10px 20px;
+                    border: none;
+                    border-radius: 5px;
+                    cursor: pointer;
+                    font-size: 16px;
+                ">Close</button>
+            `;
+
+            overlay.appendChild(message);
+            document.body.appendChild(overlay);
+
+            // Auto-close after 8 seconds
+            setTimeout(() => {
+                if (overlay.parentElement) {
+                    overlay.remove();
+                }
+            }, 8000);
         }
 
         function sendEmailCopy(data) {
