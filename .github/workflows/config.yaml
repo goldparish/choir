@@ -1,0 +1,16 @@
+# Disable Jekyll processing for HTML files
+plugins: []
+markdown: kramdown
+highlighter: none
+
+# Include all files
+include:
+  - "*.html"
+  - "*.js"
+  - "*.css"
+  - "*.jpg"
+  - "*.png"
+  - "*.gif"
+
+# Don't process these as Jekyll templates
+exclude: []
